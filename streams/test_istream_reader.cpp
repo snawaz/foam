@@ -4,8 +4,8 @@
 #include <algorithm>
 #include <vector>
 
-#include "istream_reader.hpp"
-#include "../algorithms/algorithm.hpp"
+#include "istream_reader.h"
+#include "../algorithms/algorithm.h"
 
 struct line : std::string
 {
@@ -23,8 +23,8 @@ int main()
 
 		//istream_reader<std::string> reader("istream_reader.cpp");
 		//snl::streams::istream_reader<line> reader("istream_reader.hpp");
-		std::ifstream file("istream_reader.hpp");
-		snl::streams::istream_reader<item_type> reader(file);
+		std::ifstream file("istream_reader.h");
+		foam::streams::istream_reader<item_type> reader(file);
 		int len1 = 0;
 		for(auto x : reader)
 		{

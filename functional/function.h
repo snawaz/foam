@@ -7,12 +7,12 @@
 #include <functional>
 #include <stdexcept>
 
-#include "../meta/typelist.hpp"
-#include "../noncopyable.hpp"
-#include "../strlib/strlib.hpp"
-#include "../algorithms/algorithm.hpp"
+#include "../meta/typelist.h"
+#include "../noncopyable.h"
+#include "../strlib/strlib.h"
+#include "../algorithms/algorithm.h"
 
-namespace snl
+namespace foam
 {
 	namespace functional
 	{
@@ -34,7 +34,7 @@ namespace snl
 		class multifunction;
 		
 		template<typename Signature>
-		class remover : public noncopyable
+		class remover : public ::foam::noncopyable
 		{
 			enum object_status
 			{
@@ -79,7 +79,7 @@ namespace snl
 							break;
 						case moved_both:
 							{
-								snl::strlib::string_builder sb("Cannot remove function.");
+								::foam::strlib::string_builder sb("Cannot remove function.");
 								sb.write("snl::functional::multifunction and snl::functional::remover has been moved.");
 								throw bad_remover(sb);
 							}
@@ -108,18 +108,18 @@ namespace snl
 				: m_this(ref), m_key(key), m_status(moved_none) { }
 
 				friend class multifunction<Signature>;
+				multifunction<Signature> *m_this;
 				int m_key;
 				object_status m_status;
-				multifunction<Signature> *m_this;
 		};
 
 		template<typename R, typename ...Args>
-		class multifunction<R(Args...)> : noncopyable
+		class multifunction<R(Args...)> : ::foam::noncopyable
 		{
 			public:
 				typedef R signature_type(Args...);
 				typedef R return_type;
-				typedef snl::meta::typelist<Args...> argument_types;
+				typedef foam::meta::typelist<Args...> argument_types;
 				typedef remover<signature_type> remover_type;
 				
 				multifunction() : m_next_available_key(0) {}
@@ -174,5 +174,5 @@ namespace snl
 				
 		};
 
-	} //functional
-}//snl
+	}
+}

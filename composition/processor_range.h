@@ -71,8 +71,8 @@ namespace foam
 					return it.state(*it);
 				}
 			private:
-				Predicate _predicate;
 				Range _range;
+				Predicate _predicate;
 
 		};
 
@@ -125,8 +125,8 @@ namespace foam
 					return _transformer(*it);
 				}
 			private:
-				UnaryTransformer _transformer;
 				Range _range;
+				UnaryTransformer _transformer;
 
 		};
 
@@ -186,8 +186,8 @@ namespace foam
 					return it.state(*it);
 				}
 			private:
-				Predicate _predicate;
 				Range _range;
+				Predicate _predicate;
 
 		};
 
@@ -392,7 +392,7 @@ namespace foam
 
 					using std::begin;
 					auto it = begin(_range);
-					for(int i = 0 ; i < (curr.state -1) ; ++i )
+					for(std::size_t i = 0 ; i < (curr.state -1) ; ++i )
 						++it;	
 					return { it, curr.state - 1 };
 				}

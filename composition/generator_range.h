@@ -1,4 +1,5 @@
 
+
 #pragma once
 
 #include <iterator>
@@ -8,7 +9,7 @@
 #include "utility.h"
 #include "container_traits.h"
 #include "range_iterator.h"
-#include "../optional.hpp"
+#include "../optional.h"
 
 namespace foam
 {
@@ -23,8 +24,8 @@ namespace foam
 				typedef range_iterator<self_type, iiterator>                  iterator;
 				typedef typename container_traits<Range>::value_type          value_type;
 
-				from_range(Range * pipe)
-				       	: _pipe(pipe) {}
+				from_range(Range * range)
+				       	: _range(range) {}
 
 				iterator begin() 
 				{
@@ -47,12 +48,12 @@ namespace foam
 				iiterator ibegin() 
 				{
 					using std::begin;
-					return begin(*_pipe);
+					return begin(*_range);
 				}
 				iiterator iend() 
 				{
 					using std::end;
-					return end(*_pipe);
+					return end(*_range);
 				}
 
 				iiterator next(iiterator it)
@@ -64,7 +65,7 @@ namespace foam
 					return *it;
 				}
 			private:
-				Range *_pipe;
+				Range *_range;
 		};
 		
 		template<typename UnaryGenerator>
@@ -111,8 +112,9 @@ namespace foam
 					return it.value();
 				}
 			private:
-				UnaryGenerator _generator;
 				arg_type       _start;
+				UnaryGenerator _generator;
 		};
 	}
 }
+

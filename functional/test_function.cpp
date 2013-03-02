@@ -1,13 +1,13 @@
 
 
 #include <iostream>
-#include "function.hpp"
+#include "function.h"
 
 void f(int a) { std::cout << "void f()" << a << std::endl; }
 void g(int a) { std::cout << "void g()" << a << std::endl; }
-int h(int a) { std::cout << "void h()" << a << std::endl; }
+int h(int a) { std::cout << "void h()" << a << std::endl; return 0; }
 
-typedef snl::functional::multifunction<void(int)> event;
+typedef foam::functional::multifunction<void(int)> event;
 typedef event::argument_types args;
 typedef event::remover_type remover_type;
 
@@ -15,11 +15,11 @@ void caller(event e)
 {
 	std::cout << (bool) e << std::endl;
 }
-		auto safe_call = [] (remover_type & r)
-		{
-			try { r(); }
-			catch(std::exception const & e) { std::cout << e.what() << std::endl; }
-		};
+auto safe_call = [] (remover_type & r)
+{
+	try { r(); }
+	catch(std::exception const & e) { std::cout << e.what() << std::endl; }
+};
 void call(remover_type r)
 {
 	std::cout << "\ninside call\n";
@@ -68,5 +68,5 @@ int main()
 	{
 		std::cout << e.what() << std::endl;
 	}
-
+	return 0;
 }

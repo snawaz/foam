@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <iterator>
 
-namespace snl
+namespace foam
 {
 	namespace extensions
 	{

@@ -6,9 +6,9 @@
 #include <string>
 #include <initializer_list>
 
-#include "../strlib/strlib.hpp"
+#include "../strlib/strlib.h"
 
-namespace snl
+namespace foam
 {
 	namespace streams
 	{
@@ -51,7 +51,7 @@ namespace snl
 					if ( !m_refStream ) 
 					{
 						auto msg = "snl::streams::istream_reader(std::string const &)";
-					       	throw std::runtime_error(msg + snl::strlib::format(" could not open file \"{0}\".", file));
+					       	throw std::runtime_error(msg + foam::strlib::format(" could not open file \"{0}\".", file));
 					}
 				}
 				istream_reader(std::istream & instream) :  m_refStream(instream)
@@ -82,8 +82,8 @@ namespace snl
 				class taker
 				{
 					friend class istream_reader;
-					size_t m_n;					
 					iterator & m_begin;
+					size_t m_n;					
 					taker(iterator & begin, size_t n) : m_begin(begin), m_n(n){}
 				public:
 					template<typename C>

@@ -58,6 +58,7 @@ namespace foam
 				{
 					copy(*this, other);
 				}
+				return *this;
 			}
 
 			optional& operator=(optional && other)
@@ -71,6 +72,7 @@ namespace foam
 				{
 					move(*this, other);
 				}
+				return *this;
 			}
 
 			bool has_value() const { return _valid; }

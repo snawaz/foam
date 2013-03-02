@@ -1,13 +1,15 @@
 
 #include <iostream>
-#include "strlib.hpp"
+#include "strlib.h"
+
 #include <cstdio>
+
 int main()
 {
 	try
 	{
-		using snl::strlib::print;
-		using snl::strlib::string_builder;
+		using foam::strlib::print;
+		using foam::strlib::string_builder;
 
 		string_builder sb;
 		sb.write("\n", "Sarfaraz", "Nawaz", 100, "Done");

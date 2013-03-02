@@ -1,7 +1,7 @@
 
-#pragma
+#pragma once
 
-namespace snl
+namespace foam
 {
 	class noncopyable
 	{

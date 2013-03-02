@@ -7,7 +7,7 @@
 #include <cstring>
 #include <string>
 
-#include "../strlib/strlib.hpp"
+#include "../strlib/strlib.h"
 #include "pipeline.h"
 #include "expression.h"
 #include "utility.h"
@@ -16,7 +16,7 @@ template<typename C>
 void do_print(std::string pplinestr, C && c)
 {
 	std::cout << "\n-------------------\n"  << pplinestr << "\n";
-	int i=1000;
+//	int i=1000;
 //	for (auto it = c.begin(), end = c.end() ; i && it != end; ++it, --i)
 //		std::cout << "print => " << *it << std::endl;
 	
@@ -81,10 +81,6 @@ int main()
 
 	expression<int> e;
 
-	auto pred = [] (int i) { return i % 3 == 0 ; };
-	//std::function<bool(int)> pred = [] (int i) { return i % 3 == 0 ; };
-
-        auto xxx = filter ( e % 2 == 0 ); //pred ) ;
 	print ( from ( v )  | filter ( e % 2 == 0 ) );
 	auto u = v;
 

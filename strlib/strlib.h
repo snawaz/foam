@@ -9,8 +9,8 @@
 #include <tuple>
 #include <algorithm>
 
-#include "../algorithms/algorithm.hpp"
-#include "../meta/valuelist.hpp"
+#include "../algorithms/algorithm.h"
+#include "../meta/valuelist.h"
 
 namespace foam
 {
@@ -23,18 +23,18 @@ namespace foam
 		
 		class string_builder
 		{
-			std::ostringstream oss;
-			struct sink { template<typename T> sink ( T const & ) {} };
+			std::ostringstream _oss;
+			struct sink { template<typename ... T> sink ( T&& ... ) {} };
 		public:
 			string_builder() {}
 
 			template<typename T>
-			string_builder(T && data) { oss << data; }
+			string_builder(T && data) { _oss << data; }
 
 			template<typename T>
 			string_builder & operator << ( T && data)
 			{
-				oss << data;
+				_oss << data;
 				return *this;
 			}
 
@@ -46,9 +46,9 @@ namespace foam
 				return *this;
 			}
 
-			operator std::string() const { return oss.str(); }
+			operator std::string() const { return _oss.str(); }
 
-			std::string to_string() const { return oss.str(); }
+			std::string to_string() const { return _oss.str(); }
 
 		private:
 			template<int ...N, typename ...Params>
@@ -56,14 +56,14 @@ namespace foam
 			{
 				const std::string empty;
 				constexpr int last = sizeof...(Params) - 1 ;
-				sink eat[] { (oss << args << (N < last ? separator : empty) )...};
+				sink { ( _oss << args << (N < last ? separator : empty) )...};
 			}
 		};
 
 		template<typename ...Args>
 		std::string format(char const *fmtstring, Args...args)
 		{
-			const size_t nargs = sizeof...(Args);
+			const int nargs = sizeof...(Args);
 			std::string strs[] { string_builder(args)... };
 			std::string result;
 			auto s = fmtstring;
@@ -174,6 +174,6 @@ namespace foam
 			return print(std::cout, fmtstring, args...);
 		}
 
-	} //namespace strlib
+	} 
 
-} //namespace snl
+} 

@@ -27,6 +27,6 @@ namespace foam
 				typedef typename gen<N>::type type;
 		};
 
-	} //namespace meta
+	}
 
-} //namespace foam
+} 

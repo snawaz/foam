@@ -2,10 +2,10 @@
 #pragma once
 
 #include <type_traits>
-#include "valuelist.hpp"
-#include "typelist.hpp"
+#include "valuelist.h"
+#include "typelist.h"
 
-namespace snl
+namespace foam
 {
 	namespace meta
 	{
@@ -40,6 +40,6 @@ namespace snl
 				typedef typename reverse_impl<valuelist_or_typelist>::type type; 
 		};
 
-	} //namespace meta
+	} 
 
-} //namespace snl
+} 

@@ -1,6 +1,6 @@
 
 
-#pragma
+#pragma once
 
 #include "expression_details.h"
 #include "operator.h"

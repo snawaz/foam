@@ -4,7 +4,7 @@
 #include <type_traits>
 #include <tuple>
 
-namespace snl
+namespace foam
 {
 	namespace meta
 	{
@@ -23,6 +23,6 @@ namespace snl
 			};
 		};
 
-	} //namespace meta
+	} 
 
-} //namespace snl
+} 

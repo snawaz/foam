@@ -9,7 +9,7 @@
 
 namespace foam
 {
-	namespace pipeline
+	namespace composition
 	{
 		template<typename Accumulator>
 		struct accumulate_single_1

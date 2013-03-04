@@ -4,7 +4,7 @@
 
 namespace foam
 {
-	namespace pipeline
+	namespace composition
 	{
 		template<typename Container>
 		struct container_traits

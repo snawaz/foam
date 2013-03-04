@@ -13,7 +13,7 @@
 
 namespace foam
 {
-	namespace pipeline
+	namespace composition
 	{
 #if 1		
 		//accumulate (1 parameter)

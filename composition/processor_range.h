@@ -13,7 +13,7 @@
 
 namespace foam
 {
-	namespace pipeline
+	namespace composition
 	{
 		template<typename Range, typename Predicate>
 		class filter_range
@@ -172,7 +172,7 @@ namespace foam
 					using std::end;
 					return {end(_range), _predicate};
 				}
-				iiterator next (iiterator & it) 
+				iiterator next(iiterator & it) 
 				{
 					++it;
 					return it == iend() ? iend() : (apply_predicate(it) ? it : iend());

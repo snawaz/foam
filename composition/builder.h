@@ -8,7 +8,7 @@
 
 namespace foam
 {
-	namespace pipeline
+	namespace composition
 	{
 		template<typename PipelineBuilder, template <typename,typename...> class RangeClassTemplate, typename ...Types>
 		class composed_pipe_builder

@@ -8,7 +8,7 @@
 
 namespace foam
 {
-	namespace pipeline
+	namespace composition
 	{
 		template<typename Iterator, typename State>
 		struct iterator_wrapper

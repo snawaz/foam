@@ -6,7 +6,7 @@
 
 namespace foam
 {
-	namespace pipeline
+	namespace composition
 	{
 		namespace details
 		{

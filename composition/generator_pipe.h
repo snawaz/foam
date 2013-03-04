@@ -13,7 +13,7 @@
 
 namespace foam
 {
-	namespace pipeline
+	namespace composition
 	{
 		//from 
 		template<typename Iterable>

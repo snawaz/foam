@@ -99,7 +99,7 @@ namespace foam
 
 		
 		template<typename MemberPointer>
-		auto member(MemberPointer m) -> expression<decltype(std::mem_fn(m))>
+		auto memexp(MemberPointer m) -> expression<decltype(std::mem_fn(m))>
 		{
 			return std::mem_fn(m);
 		}
@@ -107,14 +107,14 @@ namespace foam
 		constexpr struct member_invoker
 		{
 			template<typename T>
-			auto operator() (T arg) const -> decltype(member(arg))
+			auto operator() (T arg) const -> decltype(memexp(arg))
 			{
-			     return member(arg);
+			     return memexp(arg);
 			}
 			template<typename ...T>
-			auto operator() (T ...args) const -> decltype(std::make_tuple(member(args)...))
+			auto operator() (T ...args) const -> decltype(std::make_tuple(memexp(args)...))
 			{
-				auto tuple = std::make_tuple(member(args)...);
+				auto tuple = std::make_tuple(memexp(args)...);
 				return tuple;
 			}
 		}_m{};

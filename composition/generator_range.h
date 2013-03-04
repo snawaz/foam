@@ -13,7 +13,7 @@
 
 namespace foam
 {
-	namespace pipeline
+	namespace composition
 	{
 		template<typename Range>
 		class from_range 

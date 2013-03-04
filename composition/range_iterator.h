@@ -7,7 +7,7 @@
 
 namespace foam
 {
-	namespace pipeline
+	namespace composition
 	{
 		template<typename Range, typename Iterator>
 		class range_iterator 

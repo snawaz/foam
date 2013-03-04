@@ -66,8 +66,7 @@ struct polymorphic3 { template<typename T, typename U> void operator()(T, U) {} 
 
 int main()
 {
-	using namespace foam::pipeline;
-	using foam::composition::expression;
+	using namespace foam::composition;
 
 	std::vector<int>  v {1,2,3,4,5,6,7,8,9,10};
 

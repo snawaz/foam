@@ -1,7 +1,8 @@
 
 
 #include <iostream>
-#include "function.h"
+
+#include <foam/functional/function.h>
 
 void f(int a) { std::cout << "void f()" << a << std::endl; }
 void g(int a) { std::cout << "void g()" << a << std::endl; }

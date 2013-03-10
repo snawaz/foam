@@ -1,6 +1,7 @@
 
 #include <iostream>
-#include "strlib.h"
+
+#include <foam/strlib/strlib.h>
 
 #include <cstdio>
 

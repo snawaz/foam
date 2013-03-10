@@ -1,4 +1,14 @@
 
+/*
+ *
+ * (C) Copyright Sarfaraz Nawaz 2013-14, sir_nawaz959@yahoo.com
+ *
+ *
+ * Distributed under the Boost Software License, Version 1.0.
+ * (See accompanying file LICENSE_1_0.txt Or copy at http://www.boost.org/LICENSE_1_0.txt)
+ *
+ */
+
 #include <fstream>
 #include <iterator>
 #include <memory>
@@ -6,7 +16,7 @@
 #include <string>
 #include <initializer_list>
 
-#include "../strlib/strlib.h"
+#include <foam/strlib/strlib.h>
 
 namespace foam
 {

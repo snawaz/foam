@@ -7,10 +7,10 @@
 #include <cstring>
 #include <string>
 
-#include "../strlib/strlib.h"
-#include "pipeline.h"
-#include "expression.h"
-#include "utility.h"
+#include <foam/strlib/strlib.h>
+#include <foam/composition/pipeline.h>
+#include <foam/composition/expression.h>
+#include <foam/composition/utility.h>
 
 template<typename C>
 void do_print(std::string pplinestr, C && c)

@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <functional>
 
-#include "expression.h"
+#include <foam/composition/expression.h>
 
 template<typename TExpression>
 void evaluate(char const *exprstr, TExpression && e)

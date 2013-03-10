@@ -1,7 +1,0 @@
-
-foam::composition::expression<foam::composition::details::binary_expression<foam::composition::expression<int>, foam::composition::expression<int>, foam::operators::multiply>>
-
-
-foam::composition::expression<foam::composition::details::binary_expression<foam::composition::details::literal<int>, foam::composition::expression<int>, foam::operators::multiply>>
-
-foam::composition::expression<foam::composition::details::binary_expression<foam::composition::expression<foam::composition::details::binary_expression<foam::composition::expression<int>, foam::composition::expression<int>, foam::operators::multiply> >, foam::composition::expression<int>, foam::operators::multiply>>

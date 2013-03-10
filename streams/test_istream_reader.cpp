@@ -4,8 +4,8 @@
 #include <algorithm>
 #include <vector>
 
-#include "istream_reader.h"
-#include "../algorithms/algorithm.h"
+#include <foam/streams/istream_reader.h>
+#include <foam/algorithm/algorithm.h>
 
 struct line : std::string
 {

@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-#include "valuelist.h"
-#include "algorithm.h"
+#include <foam/meta/valuelist.h>
+#include <foam/meta/algorithm.h>
 
 int main()
 {

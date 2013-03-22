@@ -1,20 +1,28 @@
-foam
-====
-
-C++ library
+Foam C++ library
+================
 
 
-###Composition
+Foam is a collection of small yet cross-platform C++ libraries and utilities written in C++11.
 
-It has two parts:
+###License
 
- - Expression
- - Data Pipeline
+Foam is distributed under the [Boost Software License][license], Copyright &copy; 2013-2014 Sarfaraz Nawaz.
 
-The blogs and documentation can be found here:
+[license]:http://www.boost.org/LICENSE_1_0.txt
 
- - http://snawaz.github.com/2013/03/03/composition.html
+###Supported Platforms
 
-Enjoy composing!
+Foam has been tested with following platforms and compilers:
 
-Sarfaraz
+- Win32 using GCC 4.7.0 (MinGW).
+
+###Documentation
+
+ - [http://snawaz.github.com/foam.html][doc]
+
+[doc]:http://snawaz.github.com/foam.html
+
+Happy foaming!
+
+Regards,  
+Sarfaraz Nawaz

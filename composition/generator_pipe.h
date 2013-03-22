@@ -49,7 +49,7 @@ namespace foam
 		//{
 		//	return from_range<Iterable>(&c);
 		//}
-#if 1	
+		
 		//generate (infinity)
 		template<typename T, typename UnaryGenerator>
 		auto generate(T start, UnaryGenerator generator) -> generate_range<details::functor<UnaryGenerator, T, T>>
@@ -99,6 +99,5 @@ namespace foam
 		{
 			return arithmetic_sequence(value, 0) | take(count);
 		}
-#endif 		
 	}
 }

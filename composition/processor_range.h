@@ -93,8 +93,15 @@ namespace foam
 				typedef alias::iterator<Range>                     iiterator;
 			public:
 				typedef range_iterator<self_type, iiterator>       iterator;
+				
+				//typedef alias::type<call_result<UnaryTransformer,       
+	 			//	alias::value_type<Range>>>                 value_type;  
+
 				typedef alias::type<call_result<UnaryTransformer,       
-	 				alias::value_type<Range>>>                 value_type;  
+	 				alias::value_type<Range>>>                 value_type_t;  
+
+				typedef alias::type<std::remove_reference<value_type_t>> value_type;
+				//typedef value_type_t value_type;
 
 				transform_range(Range pipe, UnaryTransformer transformer) 
 					: _range(pipe), _transformer(transformer) 

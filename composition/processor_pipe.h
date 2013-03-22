@@ -52,7 +52,7 @@ namespace foam
 		template<typename Predicate>
 		auto filter(Predicate predicate) -> pipe_builder<filter_range, Predicate>
 		{
-			return { predicate };
+			return { std::move(predicate) };
 		}
 
 #if 1

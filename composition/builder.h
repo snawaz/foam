@@ -20,31 +20,30 @@ namespace foam
 {
 	namespace composition
 	{
-		template<typename PipelineBuilder, template <typename,typename...> class RangeClassTemplate, typename ...Types>
-		class composed_pipe_builder
+		template<typename PipelineBuilderCurrent, typename PipelineBuilderNext>
+		class builder_composer
 		{
 			public:
-				composed_pipe_builder(PipelineBuilder builder, std::tuple<Types...> args ) 
-					: _builder(builder), _arguments(args) {}
+				builder_composer(PipelineBuilderCurrent current, PipelineBuilderNext next) 
+					: _current(current), _next(next) {}
 
 				template<typename Range>
-				auto operator()(Range range) -> decltype(std::declval<PipelineBuilder>()(std::declval<RangeClassTemplate<Range, Types...>>()))
+				auto operator()(Range range) -> decltype(std::declval<PipelineBuilderNext>()(std::declval<PipelineBuilderCurrent>()(range)))
 				{
-					const size_t N = sizeof ...(Types);
-					typename ::foam::meta::generate_valuelist<N>::type indices;
-					return _builder(build(range, indices));
+					return _next(_current(range));
+				}
+				template<typename PipelineBuilderOther>
+				auto operator | (PipelineBuilderOther builder) -> 
+				builder_composer<builder_composer<PipelineBuilderCurrent,PipelineBuilderNext>, PipelineBuilderOther>
+				{
+					return { *this, builder};
 				}
 			private:
-				template<typename Range, int ...N>
-				auto build(Range range, ::foam::meta::valuelist<N...> const &) -> RangeClassTemplate<Range, Types...>
-				{
-					return {range, std::get<N>(_arguments)...};
-				}
-				PipelineBuilder _builder;
-				std::tuple<Types...> _arguments;
+				PipelineBuilderCurrent _current;
+				PipelineBuilderNext _next;
 		};
 
-		template< template <typename,typename...> class RangeClassTemplate, typename ...Types>
+		template< template<typename, typename...> class RangeClassTemplate, typename ...Types>
 		class pipe_builder
 		{
 			public:
@@ -60,9 +59,9 @@ namespace foam
 				}
 
 				template<typename PipelineBuilder>
-				auto operator | (PipelineBuilder builder) -> composed_pipe_builder<PipelineBuilder, RangeClassTemplate, Types...>
+				auto operator | (PipelineBuilder builder) -> builder_composer<pipe_builder<RangeClassTemplate, Types...>, PipelineBuilder>
 				{
-					return {builder, _arguments};
+					return {*this, builder};
 				}
 			private:
 				template<typename Range, int ...N>
@@ -73,38 +72,5 @@ namespace foam
 			private:
 				std::tuple<Types...> _arguments;
 		};
-#if 0		
-		template<typename PipelineBuilder, template <typename,typename> class RangeClassTemplate, typename UnaryFunctor>
-		struct composed_pipe_builder
-		{
-			PipelineBuilder _builder;
-			UnaryFunctor _functor;
-
-			template<typename Range>
-			auto operator()(Range range) -> decltype(std::declval<PipelineBuilder>()(std::declval<RangeClassTemplate<Range, UnaryFunctor>>()))
-			{
-				RangeClassTemplate<Range, UnaryFunctor> new_range {range, _functor};
-				return _builder(new_range);
-			}
-		};
-
-		template< template <typename,typename> class RangeClassTemplate, typename UnaryFunctor>
-		struct pipe_builder
-		{
-			UnaryFunctor _functor;
-			
-			template<typename Range>
-			auto operator()(Range range) -> RangeClassTemplate<Range, UnaryFunctor>
-			{
-				return {range, _functor};
-			}
-
-			template<typename PipelineBuilder>
-			auto operator | (PipelineBuilder builder) -> composed_pipe_builder<PipelineBuilder, RangeClassTemplate, UnaryFunctor>
-			{
-				return {builder, _functor};
-			}
-		};
-#endif
 	}
 }

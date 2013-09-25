@@ -10,11 +10,31 @@ int main()
 	try
 	{
 		using foam::strlib::print;
+		using foam::strlib::ltrim;
+		using foam::strlib::rtrim;
+		using foam::strlib::trim;
+		using foam::strlib::startswith;
+		using foam::strlib::endswith;
 		using foam::strlib::string_builder;
 
 		string_builder sb;
 		sb.write("\n", "Sarfaraz", "Nawaz", 100, "Done");
 		std::cout << sb.to_string() << std::endl;
+
+		std::cout << "|" << ltrim(" \t\r\n   ltrim    testing     ") << "|" << std::endl;
+		std::cout << "|" << rtrim("      rtrim    testing \t\r\n    ") << "|" << std::endl;
+		std::cout << "|" << trim("   \t\r\n   trim    testing   \t\r\n  ") << "|" << std::endl;
+
+		std::cout << startswith(".txt", "file.txt") << std::endl;
+		std::cout << startswith("file", "file.txt") << std::endl;
+		std::cout << startswith("", "file.txt") << std::endl;
+		std::cout << startswith(".txt", "") << std::endl;
+		std::cout << startswith("", "") << std::endl;
+		std::cout << endswith(".txt", "file.txt") << std::endl;
+		std::cout << endswith("file", "file.txt") << std::endl;
+		std::cout << endswith("", "file.txt") << std::endl;
+		std::cout << endswith(".txt", "") << std::endl;
+		std::cout << endswith("", "") << std::endl;
 
 		std::printf("|%10s|\n", "NAWAZ");
 		std::printf("|%-10s|\n", "NAWAZ");

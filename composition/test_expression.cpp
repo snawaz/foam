@@ -110,6 +110,12 @@ int main()
 			std::transform(ps.begin(), ps.end(), std::back_inserter(ages2), b);
 			for(auto && x : ages2)
 				std::cout << x << std::endl;
+
+			auto y = (x == 2) + x;
+			std::cout << y(1) << std::endl;
+			std::cout << y(2) << std::endl;
+			std::cout << y(4) << std::endl;
+
 		}
 	}
 	catch(std::exception const & e)

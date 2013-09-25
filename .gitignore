@@ -1,0 +1,7 @@
+
+#incomplete files and folders start with _
+_*
+
+#executable
+*.exe
+

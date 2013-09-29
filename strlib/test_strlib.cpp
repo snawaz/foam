@@ -5,6 +5,20 @@
 
 #include <cstdio>
 
+struct A {};
+
+std::ostream& operator << (std::ostream & out, A const &)
+{
+	return out << "A";
+}
+
+struct B { void print(std::ostream & out) { out << "B" ; } };
+
+std::ostream& operator << (std::ostream & out, B const &)
+{
+	return out << "BBB";
+}
+
 int main()
 {
 	try
@@ -41,6 +55,8 @@ int main()
 //		print("{1}\n", "Sarfaraz", "Nawaz");
 		print("|{0,10}|\n", "Sarfaraz");
 		print("|{0,-10}|\n", "Sarfaraz");
+		print("{0}, {1}, {0}\n", A(), "Well done");
+		print("{0}, {1}, {0}\n", A(), B());
 		print("my name is {2,10} {1}. {0} and {1}", "Sarfaraz", "Nawaz");
 	}
 	catch(std::exception const & e)

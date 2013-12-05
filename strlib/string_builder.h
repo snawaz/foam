@@ -73,13 +73,16 @@ namespace foam
 			{
 				detail::build(_oss, std::forward<T>(data), overload::resolver());
 			}
-			
+		
+			/*
+			 * THIS CAUSES PROBLEM when I want to do this : { string_builder(args)... } where some of args is actually std::string.
+			 * in that case, the other constructor is not getting called, instead this is called!
 			template<typename ...Params>
 			string_builder(std::string const & separator, Params && ... args)
 			{
 				write(separator, std::forward<Params>(args)...);
 			}
-
+			*/
 			template<typename T>
 			string_builder & operator << ( T && data)
 			{
@@ -100,6 +103,10 @@ namespace foam
 			std::string to_string() const { return _oss.str(); }
 
 		private:
+			template<int ...N>
+			void write_impl(std::string const & separator, meta::valuelist<N...>) 
+			{}
+			
 			template<int ...N, typename ...Params>
 			void write_impl(std::string const & separator, meta::valuelist<N...>, Params && ... args)
 			{

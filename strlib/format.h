@@ -21,6 +21,7 @@
 
 #include <foam/algorithm/algorithm.h>
 #include <foam/meta/valuelist.h>
+#include <foam/strlib/string_builder.h>
 
 namespace foam
 {
@@ -30,9 +31,14 @@ namespace foam
 		{
 			format_exception(std::string const & message) : std::invalid_argument(message) {}
 		};
+		
+		inline std::string format(char const *fmtstring)
+		{
+		    return fmtstring;
+		}
 
 		template<typename ...Args>
-		std::string format(char const *fmtstring, Args...args)
+		std::string format(char const *fmtstring, Args const & ...args)
 		{
 			const int nargs = sizeof...(Args);
 			std::string strs[] { string_builder(args)... };
@@ -101,12 +107,12 @@ namespace foam
 							auto const & v = strs[i];
 							if ( w < 0 )
 							{
-								w = -w - v.size();
+								w = -w - static_cast<int>(v.size());
 								result += v + std::string(w > 0 ? w : 0, ' ');
 							}
 							else
 							{
-								w = w - v.size();
+								w = w - static_cast<int>(v.size());
 								result += std::string(w > 0 ? w : 0, ' ') + v;
 							}
 	
@@ -134,13 +140,13 @@ namespace foam
 		}
 
 		template<typename ...Args>
-		std::ostream& print(std::ostream & out, char const * fmtstring, Args ...args)
+		std::ostream& print(std::ostream & out, char const * fmtstring, Args const & ...args)
 		{
 			return out << format(fmtstring, args...);
 		}
 		
 		template<typename ...Args>
-		std::ostream& print(char const * fmtstring, Args ...args)
+		std::ostream& print(char const * fmtstring, Args const & ...args)
 		{
 			return print(std::cout, fmtstring, args...);
 		}

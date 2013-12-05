@@ -20,6 +20,8 @@
 
 namespace foam
 {
+	
+	static const struct none_t {} none;
 
 	template<typename T>
 	class optional
@@ -30,9 +32,10 @@ namespace foam
 
 			optional() : _valid(false) {}
 
-			explicit optional(T value) :  _valid(true) 
+			template<typename U>
+			optional(U && value) :  _valid(true) 
 			{
-				new (&_storage) T(std::move(value));
+				new (&_storage) T(static_cast<T>(std::forward<U>(value)));
 			}
 
 			~optional()
@@ -54,6 +57,23 @@ namespace foam
 				{
 					move(*this, other);
 				}
+			}
+			
+			optional& operator=(none_t const &)
+			{
+				if ( has_value() )
+				{
+					value().~T();
+				}
+				_valid = false;
+				return *this;
+			}
+		
+	
+			template<typename U>
+			optional& operator=(U && other)
+			{
+				return *this = optional(std::forward<U>(other));
 			}
 
 			optional& operator=(optional const & other) 
@@ -86,6 +106,8 @@ namespace foam
 
 			bool has_value() const { return _valid; }
 
+			explicit operator bool() const { return has_value(); }
+
 			T & value()
 			{ 
 				return const_cast<T&>(static_cast<optional<T> const &>(*this).value());
@@ -99,7 +121,10 @@ namespace foam
 				}
 				return *reinterpret_cast<T const*>(&_storage);
 			}
-			
+		
+			T& operator*() { return value(); }
+			T const & operator*() const { return value(); }
+
 			bool operator==(optional const & other) const
 			{
 				if ( has_value() && other.has_value() )
@@ -110,6 +135,15 @@ namespace foam
 			bool operator!=(optional const & other) const
 			{
 				return !(*this == other);
+			}
+
+			bool operator == (none_t const &) const
+			{
+				return !has_value();
+			}
+			bool operator != (none_t const &) const
+			{
+				return !(*this == none);
 			}
 
 		private:

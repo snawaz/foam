@@ -137,7 +137,10 @@ namespace foam { namespace meta
 	//union_list
     	template<typename TypeList>
 	struct union_list : merge<TypeList>::type::template unique<> {};
-	
+
+		template<template<typename> class Transformer>
+		struct transform : typelist<typename Transformer<Types>::type...> {};
+
     };
 
     template<typename Tuple>
